@@ -1,0 +1,35 @@
+name: Read File Workflow
+
+on:
+  workflow_call:
+    inputs:
+      file_path:
+        description: "Path to the text file"
+        type: string
+        required: true
+
+jobs:
+  read-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+
+      - name: Install Dependencies
+        run: poetry install
+
+      - name: Set File Path Environment Variable
+        run: echo "FILE_PATH=${{ inputs.file_path }}" >> $GITHUB_ENV
+
+      - name: Run Python Script
+        run: poetry run python main.py
