@@ -1,0 +1,12 @@
+name: Use Central Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-central-workflow:
+    uses: chickendining/simple-workflow-repo/.github/workflows/read_file.yml@main
+    with:
+      file_path: ${{ github.event.inputs.file_path }}
