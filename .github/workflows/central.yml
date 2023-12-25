@@ -36,7 +36,10 @@ jobs:
 
       - name: Install project dependencies
         run: poetry install
+        working-directory: central_repo
+        
       - name: List all files and directories
         run: ls -a
+        
       - name: Cat file content
         run: cat caller_repo/config/org.txt
