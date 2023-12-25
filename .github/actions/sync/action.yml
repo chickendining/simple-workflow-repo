@@ -9,14 +9,26 @@ runs:
   using: "composite"
   steps:
     - name: Checkout Central Repository
-      shell: bash
-      run: |
-        git clone https://github.com/chickendining/simple-workflow-repo.git central_repo
+      uses: actions/checkout@v2
+      with:
+        repository: 'chickendining/simple-workflow-repo'
+        path: 'central_repo'
 
-    - name: Checkout Caller Repository
-      shell: bash
-      run: |
-        git clone https://github.com/${{ inputs.caller_repo }} caller_repo
+    # - name: Checkout Central Repository
+    #   shell: bash
+    #   run: |
+    #     git clone https://github.com/chickendining/simple-workflow-repo.git central_repo
+
+    # - name: Checkout Caller Repository
+    #   shell: bash
+    #   run: |
+    #     git clone https://github.com/${{ inputs.caller_repo }} caller_repo
+    
+    # - name: Checkout Caller Repository
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: ${{ inputs.caller_repo }}
+    #     path: "caller_repo"
 
     # - name: Checkout Caller Repository
     #   shell: bash
@@ -42,9 +54,9 @@ runs:
     #   run: poetry install
     #   working-directory: central_repo
 
-    - name: List all files and directories
-      shell: bash
-      run: ls -a
+    # - name: List all files and directories
+    #   shell: bash
+    #   run: ls -a
 
     # - name: Run main.py script
     #   shell: bash
