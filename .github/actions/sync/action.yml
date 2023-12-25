@@ -1,0 +1,40 @@
+name: Central Composite Workflow
+
+input:
+  caller_repo:
+    description: "a name"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Central Repository
+      uses: actions/checkout@v2
+      with:
+        repository: "chickendining/simple-workflow-repo"
+        path: "central_repo"
+    - name: Checkout Caller Repository
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ inputs.caller_repo }}
+        path: "caller_repo"
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+        poetry --version
+
+    - name: Install project dependencies
+      run: poetry install
+      working-directory: central_repo
+
+    - name: List all files and directories
+      run: ls -a
+
+    - name: Run main.py script
+      run: poetry runpython src/main.py
+      working-directory: central_repo

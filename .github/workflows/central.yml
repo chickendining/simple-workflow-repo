@@ -42,5 +42,5 @@ jobs:
         run: ls -a
 
       - name: Run main.py script
-        run: poetry run python src/main.py
+        run: poetry runpython src/main.py
         working-directory: central_repo
