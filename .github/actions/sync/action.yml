@@ -3,6 +3,7 @@ name: Central Composite Workflow
 input:
   caller_repo:
     description: "a name"
+    required: true
 
 runs:
   using: "composite"
