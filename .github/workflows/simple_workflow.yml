@@ -1,11 +1,16 @@
-name: Simple Workflow
+name: Central Reusable Workflow
 
 on:
   workflow_call:
+    inputs:
+      file_path:
+        description: "Path to the file"
+        required: true
+        type: string
 
 jobs:
-  say-hello:
+  main-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo a Greeting
-        run: echo "Hello, world!"
+      - name: Echo File Path
+        run: echo "d"
