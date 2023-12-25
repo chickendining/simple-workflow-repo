@@ -32,6 +32,24 @@ runs:
         echo "$HOME/.poetry/bin" >> $GITHUB_PATH
         poetry --version
 
+    - name: Install project dependencies
+      shell: bash
+      run: |
+        cd central_repo
+        poetry install
+
+    - name: Install project dependencies
+      shell: bash
+      run: |
+        cd central_repo
+        poetry install
+
+    - name: Run main.py script
+      shell: bash
+      run: |
+        cd central_repo
+        poetry run python src/main.py
+
     # - name: Install project dependencies
     #   shell: bash
     #   run: poetry install
