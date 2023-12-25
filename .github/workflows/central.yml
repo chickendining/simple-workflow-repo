@@ -1,0 +1,27 @@
+name: Central Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      caller_repo:
+        description: "Repository name of the caller"
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Central Repository
+        uses: actions/checkout@v2
+        with:
+          repository: "chickendining/simple-workflow-repo"
+          path: "central_repo"
+      - name: Checkout Caller Repository
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ inputs.caller_repo }}
+          path: "caller_repo"
+      - name: List all files and directories
+        run: ls -a
