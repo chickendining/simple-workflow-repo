@@ -23,6 +23,19 @@ jobs:
         with:
           repository: ${{ inputs.caller_repo }}
           path: "caller_repo"
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+          poetry --version
+
+      - name: Install project dependencies
+        run: poetry install
       - name: List all files and directories
         run: ls -a
       - name: Cat file content
