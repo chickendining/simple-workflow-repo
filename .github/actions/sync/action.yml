@@ -11,36 +11,19 @@ runs:
     - name: Checkout Central Repository
       uses: actions/checkout@v2
       with:
-        repository: 'chickendining/simple-workflow-repo'
-        path: 'central_repo'
+        repository: "chickendining/simple-workflow-repo"
+        path: "central_repo"
 
-    # - name: Checkout Central Repository
-    #   shell: bash
-    #   run: |
-    #     git clone https://github.com/chickendining/simple-workflow-repo.git central_repo
+    - name: Checkout Caller Repository
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ inputs.caller_repo }}
+        path: "caller_repo"
 
-    # - name: Checkout Caller Repository
-    #   shell: bash
-    #   run: |
-    #     git clone https://github.com/${{ inputs.caller_repo }} caller_repo
-    
-    # - name: Checkout Caller Repository
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: ${{ inputs.caller_repo }}
-    #     path: "caller_repo"
-
-    # - name: Checkout Caller Repository
-    #   shell: bash
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: ${{ inputs.caller_repo }}
-    #     path: "caller_repo"
-    # - name: Setup Python
-    #   shell: bash
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.9
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
 
     # - name: Install Poetry
     #   shell: bash
