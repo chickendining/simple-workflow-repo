@@ -9,33 +9,40 @@ runs:
   using: "composite"
   steps:
     - name: Checkout Central Repository
+      shell: bash
       uses: actions/checkout@v2
       with:
         repository: "chickendining/simple-workflow-repo"
         path: "central_repo"
     - name: Checkout Caller Repository
+      shell: bash
       uses: actions/checkout@v2
       with:
         repository: ${{ inputs.caller_repo }}
         path: "caller_repo"
     - name: Setup Python
+      shell: bash
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
 
     - name: Install Poetry
+      shell: bash
       run: |
         curl -sSL https://install.python-poetry.org | python3 -
         echo "$HOME/.poetry/bin" >> $GITHUB_PATH
         poetry --version
 
     - name: Install project dependencies
+      shell: bash
       run: poetry install
       working-directory: central_repo
 
     - name: List all files and directories
+      shell: bash
       run: ls -a
 
     - name: Run main.py script
-      run: poetry runpython src/main.py
+      shell: bash
+      run: poetry run python src/main.py
       working-directory: central_repo
